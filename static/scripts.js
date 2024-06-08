@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function appendMessage(sender, message) {
         const messageDiv = document.createElement("div");
         messageDiv.textContent = `${sender}: ${message}`;
-        messageDiv.classList.add("message", sender === "User" ? "user" : "bot");
+        messageDiv.classList.add("message", sender === "User" ? "user-message" : "bot-message");
         conversation.appendChild(messageDiv);
         conversation.scrollTop = conversation.scrollHeight;
     }
@@ -31,6 +31,21 @@ document.addEventListener("DOMContentLoaded", function() {
         return data.response || data.error;
     }
 
+    function speak(text) {
+        console.log("Attempting to speak: ", text);  // Debug log
+        responsiveVoice.speak(text, "US English Female", {
+            onstart: function() {
+                console.log("Speech started");
+            },
+            onend: function() {
+                console.log("Speech ended");
+            },
+            onerror: function(e) {
+                console.error("Speech error: ", e);
+            }
+        });
+    }
+
     startButton.addEventListener("click", () => {
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = "en-US";
@@ -44,11 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         recognition.onresult = async function(event) {
             const userSpeech = event.results[0][0].transcript;
-            appendMessage("🧑‍🦰", userSpeech);
+            appendMessage("User", userSpeech);
             hideWave();
             startButton.textContent = "Start Speaking";
             const botResponse = await sendMessage(userSpeech);
-            appendMessage("🤖", botResponse);
+            appendMessage("Bot", botResponse);
+            speak(botResponse);
         };
 
         recognition.onspeechend = function() {
