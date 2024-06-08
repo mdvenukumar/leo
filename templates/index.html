@@ -3,114 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEO AI</title>
+  <title>Voice Assistant</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    .full-screen {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      height: 100vh;
-      background-color: #1a202c;
-      color: #fff;
-    }
-
-    .header {
-      font-size: 48px;
-      font-weight: bold;
-      margin-top: 4rem;
-      margin-bottom: 2rem;
-    }
-
-    .chat-container {
-      flex: 1;
-      width: 100%;
-      max-width: 800px;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-
-    .container {
-      width: 100%;
-      padding: 0;
-      background-color: transparent;
-    }
-
     .conversation {
-      overflow-y: auto;
-      padding: 0;
-    }
-
-    .message {
-      margin-bottom: 1rem;
-      padding: 1rem;
+      background-color: #f5f5f5;
       border-radius: 10px;
+      padding: 1rem;
+      max-height: 300px;
+      overflow-y: auto;
     }
-
+    .message {
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
     .user-message {
-      background-color: #4a5568;
+      background-color: #e0f2ff;
+      color: #000;
     }
-
     .bot-message {
-      background-color: #6d7f99;
+      background-color: #f8f8f8;
+      color: #333;
       text-align: right;
     }
-
     .initialMessage {
       font-weight: bold;
       text-align: center;
-      margin-bottom: 2rem;
-      padding: 1rem;
-      border-radius: 10px;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
     }
-
-    .initialMessage:hover {
-      background-color: #2d3748;
+    #voiceInput {
+      display: flex;
+      align-items: center;
     }
-
     #startButton {
-      position: fixed;
-      bottom: 3rem;
-      z-index: 1000;
-      background-color: #4a5568;
-      color: #fff;
-      padding: 1.5rem;
+      background-color: #007bff;
+      color: white;
+      padding: 1rem 2rem;
       border: none;
-      border-radius: 50%;
+      border-radius: 5px;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
-
     #startButton:hover {
-      background-color: #6d7f99;
-      transform: scale(1.1);
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+      background-color: #0069d9;
+      transform: scale(1.02);
     }
   </style>
   <script src="https://code.responsivevoice.org/responsivevoice.js?key=I6Kwd9wA"></script>
 </head>
-<body>
-  <div class="full-screen">
-    <div class="header">LEO AI</div>
-    <div class="chat-container">
-      <div class="container">
-        <div class="initialMessage text-blue-900">
-          Welcome! How can I assist you today?
-        </div>
-        <div id="conversation" class="conversation"></div>
-      </div>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-lg shadow-md w-full md:max-w-xl">
+    <div class="text-center mb-8">
+      <div id="wave"></div>
     </div>
-    <button id="startButton" class="rounded-full p-3">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M10 14.5a2.5 2.5 0 0 1-2.5-2.5v-7A2.5 2.5 0 0 1 10 2h.5a3.5 3.5 0 0 1 0 7H9.5a.5.5 0 0 1 0-1h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 1 1 0v1a1.5 1.5 0 0 1-1.5 1.5H8a1 1 0 1 1 0-2h1a1.5 1.5 0 0 0 1.5-1.5v-1A1.5 1.5 0 0 1 9.5 4H7.3a1.7 1.7 0 1 0 0 3.4h1.2a.5.5 0 1 1 0 1h-.3a1.7 1.7 0 0 0-1.4 1.7v7A2.5 2.5 0 0 1 10 14.5z" clip-rule="evenodd"/>
-        <path fill-rule="evenodd" d="M5 10a5 5 0 1 1 10 0v3a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1v-1h-1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1h2v-1H8v1h1a1 1 0 0 1 0 2H7a1 1 0 1 1 0-2h1v-1H6v1h1a1 1 0 0 1-1 1v1zm1-3h8v2H6V7z" clip-rule="evenodd"/>
-      </svg>
-    </button>
+    <div class="initialMessage p-4 rounded-lg text-blue-900 mb-4">
+      Welcome! How can I assist you today?
+    </div>
+    <div id="conversation" class="conversation"></div>
+    <div class="flex justify-center items-center mt-4">
+      <button id="startButton">Start Speaking</button>
+      <div id="voiceInput" class="voiceInput ml-4 hidden"></div>
+    </div>
   </div>
   <script src="/static/scripts.js"></script>
 </body>
