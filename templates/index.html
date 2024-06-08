@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Your custom CSS styles */
+    .conversation {
+      background-color: #f5f5f5; /* Light gray background */
+      border-radius: 10px; /* Rounded corners */
+      padding: 1rem; /* Add padding for spacing */
+      max-height: 300px; /* Adjust max-height as needed */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .message {
+      border-radius: 5px; /* Slightly rounded messages */
+      margin-bottom: 1rem; /* Spacing between messages */
+    }
+
+    .user-message {
+      background-color: #e0f2ff; /* Light blue for user messages */
+      color: #000; /* Black text for user messages */
+    }
+
+    .bot-message {
+      background-color: #f8f8f8; /* Light gray for bot messages */
+      color: #333; /* Darker gray text for bot messages */
+      text-align: right; /* Right-align bot messages for clarity */
+    }
+
+    .initialMessage {
+      font-weight: bold;
+      text-align: center; /* Center initial message */
+    }
+
+    #voiceInput {
+      display: flex;
+      align-items: center; /* Center voice input content */
+    }
+
+    #startButton {
+      background-color: #007bff; /* Blue button */
+      color: white;
+      padding: 1rem 2rem; /* Adjust padding for better size */
+      border: none; /* Remove border */
+      border-radius: 5px; /* Rounded corners */
+      cursor: pointer; /* Indicate clickable button */
+      transition: all 0.3s ease-in-out; /* Smoother button transitions */
+    }
+
+    #startButton:hover {
+      background-color: #0069d9; /* Darker blue on hover */
+      transform: scale(1.02); /* Slight scale on hover for emphasis */
+    }
+  </style>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-lg shadow-md w-full md:max-w-xl">
+    <div class="text-center mb-8">
+      <div id="wave"></div>
+    </div>
+    <div class="initialMessage p-4 rounded-lg text-blue-900 mb-4">
+      Welcome! How can I assist you today?
+    </div>
+    <div id="conversation" class="conversation">
+      </div>
+    <div class="flex justify-center items-center mt-4">
+      <button id="startButton">Start Speaking</button>
+      <div id="voiceInput" class="voiceInput ml-4 hidden">
+    </div>
+  </div>
+  <script src="/static/scripts.js"></script>
+</body>
+</html>

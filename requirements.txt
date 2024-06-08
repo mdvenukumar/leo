@@ -1,0 +1,5 @@
+Flask
+Gunicorn
+google.generativeai
+ratelimit
+pyttsx3
